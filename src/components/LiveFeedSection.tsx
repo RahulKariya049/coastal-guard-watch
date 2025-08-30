@@ -86,7 +86,7 @@ const getSeverityIcon = (severity: string) => {
 
 const LiveFeedSection = () => {
   return (
-    <section id="live-feed" className="py-20 bg-background">
+    <section id="live-alerts" className="py-20 bg-background">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">

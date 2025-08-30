@@ -36,7 +36,7 @@ const Navigation = ({ onSubscribeClick }: NavigationProps) => {
             <div className="w-8 h-8 bg-gradient-ocean rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">🌊</span>
             </div>
-            <span className="font-bold text-xl text-primary">CoastalGuard</span>
+            <span className="font-bold text-xl text-primary">Meteorofy</span>
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
@@ -53,10 +53,10 @@ const Navigation = ({ onSubscribeClick }: NavigationProps) => {
               Predictions
             </button>
             <button 
-              onClick={() => scrollToSection('live-feed')}
+              onClick={() => scrollToSection('live-alerts')}
               className="nav-link"
             >
-              Live Feed
+              Live Alerts
             </button>
             <Button 
               onClick={onSubscribeClick}

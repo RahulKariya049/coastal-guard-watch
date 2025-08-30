@@ -11,7 +11,7 @@ const Footer = () => {
               <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">🌊</span>
               </div>
-              <span className="font-bold text-xl">CoastalGuard</span>
+              <span className="font-bold text-xl">Meteorofy</span>
             </div>
             <p className="text-primary-foreground/80 leading-relaxed">
               A comprehensive monitoring system designed to track coastal threats and provide 
@@ -122,7 +122,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-primary-foreground/20 mt-12 pt-8 text-center">
           <p className="text-primary-foreground/60">
-            © 2024 CoastalGuard Monitoring System. Built for safer coastal communities.
+            © 2024 Meteorofy Monitoring System. Built for safer coastal communities.
           </p>
           <p className="text-sm text-primary-foreground/40 mt-2">
             Always follow official emergency protocols and local authority guidance.
