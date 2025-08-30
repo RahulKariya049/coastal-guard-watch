@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import WeatherResults from './WeatherResults';
 import mapImage from '@/assets/india-coastal-map.png';
 
 const coastalStates = [
@@ -24,27 +25,27 @@ const citiesByState: { [key: string]: string[] } = {
 const PredictionsSection = () => {
   const [selectedState, setSelectedState] = useState<string>('');
   const [selectedCity, setSelectedCity] = useState<string>('');
-  const [prediction, setPrediction] = useState<any>(null);
+  const [showResults, setShowResults] = useState(false);
 
   const handlePredict = () => {
     if (selectedState && selectedCity) {
-      // Mock prediction data
-      setPrediction({
-        location: `${selectedCity}, ${selectedState}`,
-        riskLevel: Math.random() > 0.5 ? 'High' : 'Moderate',
-        rainfall: Math.floor(Math.random() * 100) + 20,
-        windSpeed: Math.floor(Math.random() * 80) + 20,
-        waveHeight: Math.floor(Math.random() * 5) + 1,
-        temperature: Math.floor(Math.random() * 10) + 25
-      });
+      setShowResults(true);
     }
   };
 
-  const handleMapClick = (state: string, city: string) => {
-    setSelectedState(state);
-    setSelectedCity(city);
+  const handleBackToForm = () => {
+    setShowResults(false);
   };
 
+
+  if (showResults && selectedState && selectedCity) {
+    return (
+      <WeatherResults 
+        location={`${selectedCity}, ${selectedState}`}
+        onBack={handleBackToForm}
+      />
+    );
+  }
   return (
     <section id="predictions" className="py-20 bg-gradient-sky">
       <div className="container mx-auto px-6">
@@ -70,7 +71,6 @@ const PredictionsSection = () => {
                   <Select value={selectedState} onValueChange={(value) => {
                     setSelectedState(value);
                     setSelectedCity('');
-                    setPrediction(null);
                   }}>
                     <SelectTrigger>
                       <SelectValue placeholder="Choose a state..." />
@@ -106,46 +106,8 @@ const PredictionsSection = () => {
                   disabled={!selectedState || !selectedCity}
                   className="w-full hero-button text-lg py-6"
                 >
-                  Get Prediction
+                  Get Weather Analysis
                 </Button>
-
-                {prediction && (
-                  <Card className="mt-6 bg-accent/10 border-accent">
-                    <CardHeader>
-                      <CardTitle className="text-lg text-accent">Prediction Results</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-3">
-                      <div className="flex justify-between">
-                        <span>Location:</span>
-                        <span className="font-semibold">{prediction.location}</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Risk Level:</span>
-                        <span className={`font-semibold ${
-                          prediction.riskLevel === 'High' ? 'text-destructive' : 'text-secondary'
-                        }`}>
-                          {prediction.riskLevel}
-                        </span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Expected Rainfall:</span>
-                        <span className="font-semibold">{prediction.rainfall}mm</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Wind Speed:</span>
-                        <span className="font-semibold">{prediction.windSpeed} km/h</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Wave Height:</span>
-                        <span className="font-semibold">{prediction.waveHeight}m</span>
-                      </div>
-                      <div className="flex justify-between">
-                        <span>Temperature:</span>
-                        <span className="font-semibold">{prediction.temperature}°C</span>
-                      </div>
-                    </CardContent>
-                  </Card>
-                )}
               </CardContent>
             </Card>
           </div>
@@ -163,12 +125,15 @@ const PredictionsSection = () => {
                     src={mapImage}
                     alt="India Coastal Map"
                     className="max-w-full h-auto rounded-lg shadow-card cursor-pointer hover:scale-105 transition-transform duration-300"
-                    onClick={() => handleMapClick('Tamil Nadu', 'Chennai')}
+                    onClick={() => {
+                      setSelectedState('Tamil Nadu');
+                      setSelectedCity('Chennai');
+                    }}
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <p className="text-center text-muted-foreground bg-background/80 px-4 py-2 rounded-lg">
-                      Interactive map coming soon!<br />
-                      <span className="text-sm">Click to select Chennai, Tamil Nadu</span>
+                      🗺️ Interactive map coming soon!<br />
+                      <span className="text-sm">Click anywhere to select Chennai, Tamil Nadu</span>
                     </p>
                   </div>
                 </div>
