@@ -8,35 +8,54 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Coastal Theme - Marine Blues */
+    --background: 206 100% 97%;
+    --foreground: 208 100% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 208 100% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 208 100% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Deep Ocean Primary */
+    --primary: 208 100% 25%;
+    --primary-foreground: 206 100% 97%;
+    --primary-glow: 208 85% 35%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Sky Blue Secondary */
+    --secondary: 199 89% 48%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Light Ocean Muted */
+    --muted: 206 50% 92%;
+    --muted-foreground: 208 25% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Seafoam Accent */
+    --accent: 186 100% 42%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 206 30% 88%;
+    --input: 206 30% 95%;
+    --ring: 208 100% 25%;
 
-    --radius: 0.5rem;
+    /* Ocean Gradients */
+    --gradient-ocean: linear-gradient(135deg, hsl(208 100% 25%), hsl(199 89% 48%));
+    --gradient-sky: linear-gradient(180deg, hsl(206 100% 97%), hsl(186 25% 85%));
+    --gradient-hero: linear-gradient(135deg, hsl(208 100% 25%) 0%, hsl(199 89% 48%) 50%, hsl(186 100% 42%) 100%);
+    
+    /* Shadows */
+    --shadow-ocean: 0 10px 40px -10px hsl(208 100% 25% / 0.3);
+    --shadow-glow: 0 0 30px hsl(199 89% 48% / 0.4);
+    --shadow-card: 0 4px 20px -4px hsl(208 50% 25% / 0.15);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -56,33 +75,35 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Deep Ocean Dark Theme */
+    --background: 208 100% 8%;
+    --foreground: 206 100% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 208 85% 12%;
+    --card-foreground: 206 100% 95%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 208 85% 12%;
+    --popover-foreground: 206 100% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 186 100% 42%;
+    --primary-foreground: 208 100% 8%;
+    --primary-glow: 186 85% 52%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 208 50% 20%;
+    --secondary-foreground: 206 100% 95%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 208 50% 16%;
+    --muted-foreground: 206 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 208 100% 8%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --border: 208 50% 20%;
+    --input: 208 50% 16%;
+    --ring: 186 100% 42%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -100,6 +121,63 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Floating clouds animation */
+  .clouds-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120%;
+    height: 100%;
+    background-image: url('/src/assets/clouds-ocean-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+    animation: float-clouds 20s ease-in-out infinite;
+  }
+
+  /* Hero button styles */
+  .hero-button {
+    @apply bg-gradient-ocean text-white px-8 py-4 rounded-xl font-semibold shadow-ocean hover:shadow-glow transition-all duration-300 hover:scale-105 hover:animate-glow-pulse;
+  }
+
+  /* Nav link hover effects */
+  .nav-link {
+    @apply relative text-foreground hover:text-primary transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 50%;
+    background: hsl(var(--primary));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Card hover effects */
+  .alert-card {
+    @apply bg-card border border-border rounded-xl p-6 shadow-card hover:shadow-ocean transition-all duration-300 hover:-translate-y-1;
+  }
+
+  /* Glassmorphic effect */
+  .glass-effect {
+    @apply backdrop-blur-md bg-white/10 border border-white/20;
   }
 }
